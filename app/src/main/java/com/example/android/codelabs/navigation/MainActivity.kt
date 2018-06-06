@@ -35,13 +35,12 @@ import androidx.navigation.ui.NavigationUI
 /**
  * A simple activity demonstrating use of a NavHostFragment with a navigation drawer.
  */
-class MainActivity : AppCompatActivity() {
-    private var drawerLayout: DrawerLayout? = null
+class MainActivity : BaseActivity() {
+    override fun getLayoutResId(): Int {
+        return R.layout.navigation_activity
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.navigation_activity)
-
+    override fun initView() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
@@ -56,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         setupNavigationMenu(navController)
 
         setupBottomNavMenu(navController)
-
         navController.addOnNavigatedListener { _, destination ->
             val dest: String = try {
                 resources.getResourceName(destination.id)
@@ -69,6 +67,8 @@ class MainActivity : AppCompatActivity() {
             Log.d("NavigationActivity", "Navigated to $dest")
         }
     }
+
+    private var drawerLayout: DrawerLayout? = null
 
     private fun setupBottomNavMenu(navController: NavController) {
         findViewById<BottomNavigationView>(R.id.bottom_nav_view)?.let { bottomNavView ->

@@ -43,17 +43,25 @@ class FlowStepFragment : Fragment() {
 //        }
         // TODO ENDSTEP 9
 
-        return when (step) {
-            2 -> inflater.inflate(R.layout.flow_step_two_fragment, container, false)
-            else -> inflater.inflate(R.layout.flow_step_one_fragment, container, false)
+//        return when (step) {
+//            2 -> inflater.inflate(R.layout.flow_step_two_fragment, container, false)
+//            else -> inflater.inflate(R.layout.flow_step_one_fragment, container, false)
+//        }
+
+        return when(step){
+            1 -> inflater.inflate(R.layout.flow_step_one_fragment,container,true)
+            else -> {
+                  inflater.inflate(R.layout.flow_step_one_fragment,container,true)
+            }
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<View>(R.id.next_button).setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.next_action)
-        )
+//        view.findViewById<View>(R.id.next_button).setOnClickListener(
+//            Navigation.createNavigateOnClickListener(R.id.next_action)
+//        )
+        view.findViewById<View>(R.id.next_button)?.setOnClickListener { Navigation.findNavController(it).navigate(R.id.next_action) }
     }
 }
